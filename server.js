@@ -13,7 +13,7 @@ import { deleteMazo } from './controllers/deleteMazo.js';
 import { deleteCarta } from './controllers/deleteCarta.js';
 
 const app = express();
-const port = 5432;
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

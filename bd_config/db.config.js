@@ -1,10 +1,10 @@
 export const dbConfig = {
-        HOST: 'db.ugmgbdtzajhdgghiyfas.supabase.co', 
-        USER: 'postgres', 
-        PASSWORD: 'P8GIt5WSLLW1p6mR', 
-        DB: 'postgres', 
-        DIALECT: 'postgres',
-        PORT: 5432,
+    HOST: process.env.DB_HOST || 'localhost',
+    USER: process.env.DB_USER || 'postgres',
+    PASSWORD: process.env.DB_PASSWORD || 'password',
+    DB: process.env.DB_NAME || 'mydatabase',
+    DIALECT: process.env.DB_DIALECT || 'postgres',
+    PORT: process.env.DB_PORT || 5432
     };
 
 

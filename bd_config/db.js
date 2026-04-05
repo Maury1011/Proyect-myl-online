@@ -19,7 +19,8 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
         ssl: {
             require: true,
             rejectUnauthorized: false // Asegúrate de configurar esto correctamente para tu entorno
-        }
+        },
+        family: 4 // Asegura que se use IPv4 para la conexión, si es necesario  
     }
 });
 
