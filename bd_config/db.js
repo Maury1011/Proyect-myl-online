@@ -13,14 +13,15 @@ import CartasMazoModel from '../models/carta.mazo.model.js';  // Ajusta la ruta 
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host: dbConfig.HOST,
+    port: dbConfig.PORT,
     dialect: dbConfig.DIALECT,
-    logging: false, // Desactiva el registro de SQL en consola si no lo necesitas
+    logging: false,
+    family: 4,  // 👈 aquí afuera, no dentro de dialectOptions
     dialectOptions: {
         ssl: {
             require: true,
-            rejectUnauthorized: false // Asegúrate de configurar esto correctamente para tu entorno
-        },
-        family: 4 // Asegura que se use IPv4 para la conexión, si es necesario  
+            rejectUnauthorized: false
+        }
     }
 });
 
