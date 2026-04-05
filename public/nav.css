@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300&display=swap');
+
+/* ─── Variables (consistentes con styles.css) ────────── */
+:root {
+    --bg-base:        #0b0d12;
+    --bg-surface:     #13161e;
+    --bg-card:        #191c26;
+    --bg-card-hover:  #1f2333;
+    --border:         #272b3a;
+
+    --accent:         #c9a227;
+    --accent-dim:     #8a6d18;
+    --accent-glow:    rgba(201, 162, 39, 0.18);
+
+    --red:            #AF1740;
+    --red-glow:       rgba(175, 23, 64, 0.25);
+
+    --text-primary:   #e6e8f0;
+    --text-secondary: #8a8fa8;
+    --text-muted:     #4a4f66;
+
+    --radius-sm:      6px;
+
+    --transition:     0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Nav ────────────────────────────────────────────── */
+.nav {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 6px 14px;
+    display: inline-block;
+    box-shadow:
+        0 4px 20px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.03);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Franja decorativa superior */
+.nav::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--red), var(--accent-dim), transparent);
+    border-radius: 2px 2px 0 0;
+}
+
+/* ─── Lista ──────────────────────────────────────────── */
+.nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.nav li {
+    display: inline;
+}
+
+/* ─── Links ──────────────────────────────────────────── */
+.nav a {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text-secondary);
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    transition: var(--transition);
+    display: inline-block;
+    position: relative;
+}
+
+.nav a:hover {
+    color: var(--accent);
+    background: var(--accent-glow);
+    border-color: var(--accent-dim);
+}
+
+/* Link activo */
+.nav a.active,
+.nav a[aria-current="page"] {
+    color: var(--accent);
+    background: var(--bg-card);
+    border-color: var(--accent-dim);
+    box-shadow: 0 0 12px var(--accent-glow);
+}
+
+/* Separador entre items */
+.nav li + li::before {
+    content: '·';
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-right: 4px;
+    pointer-events: none;
+    vertical-align: middle;
+}

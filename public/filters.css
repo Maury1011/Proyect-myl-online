@@ -1,0 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300&display=swap');
+
+/* ─── Variables (consistentes con styles.css) ────────── */
+:root {
+    --bg-base:        #0b0d12;
+    --bg-surface:     #13161e;
+    --bg-card:        #191c26;
+    --bg-card-hover:  #1f2333;
+    --border:         #272b3a;
+    --border-glow:    rgba(175, 130, 60, 0.4);
+
+    --accent:         #c9a227;
+    --accent-dim:     #8a6d18;
+    --accent-glow:    rgba(201, 162, 39, 0.18);
+
+    --red:            #AF1740;
+    --red-dim:        #7a1030;
+    --red-glow:       rgba(175, 23, 64, 0.25);
+
+    --text-primary:   #e6e8f0;
+    --text-secondary: #8a8fa8;
+    --text-muted:     #4a4f66;
+
+    --radius-sm:      6px;
+    --radius-md:      12px;
+
+    --transition:     0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Panel de Filtros ───────────────────────────────── */
+#filters {
+    position: fixed;
+    top: 0;
+    left: -400px;
+    width: 320px;
+    height: 100vh;
+    background: var(--bg-surface);
+    border-right: 1px solid var(--border);
+    padding: 90px 24px 30px 24px;
+    box-shadow: 4px 0 40px rgba(0, 0, 0, 0.7), 0 0 60px rgba(175, 23, 64, 0.06);
+    z-index: 1000;
+    transition: left 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    overflow-y: auto;
+
+    /* Línea decorativa superior en acento dorado */
+    background-image:
+        linear-gradient(90deg, var(--red) 0%, var(--accent-dim) 100%);
+    background-size: 100% 3px;
+    background-repeat: no-repeat;
+    background-position: top left;
+}
+
+#filters.active {
+    left: 0;
+}
+
+/* ─── Botón Toggle ───────────────────────────────────── */
+.filter-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 42px;
+    height: 42px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    transition: var(--transition);
+}
+
+.filter-toggle:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--accent-dim);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 0 12px var(--accent-glow);
+    transform: scale(1.08);
+}
+
+/* ─── Icono Hamburguesa ──────────────────────────────── */
+.filter-toggle span {
+    position: relative;
+    width: 16px;
+    height: 2px;
+    background: var(--accent);
+    display: block;
+    border-radius: 2px;
+    transition: var(--transition);
+}
+
+.filter-toggle span::before,
+.filter-toggle span::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: var(--transition);
+}
+
+.filter-toggle span::before { top: -6px; }
+.filter-toggle span::after  { bottom: -6px; }
+
+.filter-toggle.active span {
+    background: transparent;
+}
+
+.filter-toggle.active span::before {
+    top: 0;
+    transform: rotate(45deg);
+    background: var(--red);
+}
+
+.filter-toggle.active span::after {
+    bottom: 0;
+    transform: rotate(-45deg);
+    background: var(--red);
+}
+
+/* ─── Overlay ────────────────────────────────────────── */
+.filter-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(2px);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.filter-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ─── Título del Panel ───────────────────────────────── */
+#filters h2 {
+    font-family: 'Cinzel', serif;
+    color: var(--accent);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px var(--accent-glow);
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+}
+
+#filters h2::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 48px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    border-radius: 2px;
+}
+
+/* ─── Formulario ─────────────────────────────────────── */
+#filters form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* ─── Labels ─────────────────────────────────────────── */
+#filters label {
+    display: block;
+    font-family: 'Cinzel', serif;
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 5px;
+    transition: var(--transition);
+}
+
+#filters label:has(+ select:focus),
+#filters label:has(+ select:hover) {
+    color: var(--accent);
+}
+
+/* ─── Selects ────────────────────────────────────────── */
+#filters select {
+    width: 100%;
+    padding: 11px 40px 11px 14px;
+    font-family: 'Crimson Pro', serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--text-primary);
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%238a6d18' d='M5 7L1 3h8z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    outline: none;
+}
+
+#filters select:hover {
+    border-color: var(--accent-dim);
+    background-color: var(--bg-card-hover);
+    transform: translateX(3px);
+}
+
+#filters select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-glow), 0 2px 12px rgba(0,0,0,0.4);
+    background-color: var(--bg-card-hover);
+}
+
+#filters select option {
+    background-color: var(--bg-surface);
+    color: var(--text-primary);
+}
+
+#filters select option[value=""] {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* ─── Botón Principal (boton2) ───────────────────────── */
+.boton2 {
+    background: linear-gradient(135deg, var(--red-dim), var(--red));
+    color: var(--text-primary);
+    border: 1px solid rgba(175, 23, 64, 0.5);
+    padding: 11px 18px;
+    border-radius: var(--radius-sm);
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 100%;
+    margin-top: 6px;
+    box-shadow: 0 4px 16px rgba(175, 23, 64, 0.2);
+}
+
+.boton2:hover {
+    background: linear-gradient(135deg, var(--red), #d01f50);
+    border-color: var(--red);
+    box-shadow: 0 4px 24px var(--red-glow), 0 0 16px rgba(175, 23, 64, 0.3);
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+.boton2:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px var(--red-glow);
+}
+
+/* ─── Scrollbar del Panel ────────────────────────────── */
+#filters::-webkit-scrollbar {
+    width: 4px;
+}
+
+#filters::-webkit-scrollbar-track {
+    background: var(--bg-base);
+}
+
+#filters::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 2px;
+}
+
+#filters::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-dim);
+}
+
+/* ─── Responsive ─────────────────────────────────────── */
+@media (max-width: 768px) {
+    #filters {
+        width: 280px;
+        left: -300px;
+        padding: 76px 18px 20px 18px;
+    }
+
+    #filters h2 {
+        font-size: 15px;
+    }
+}
