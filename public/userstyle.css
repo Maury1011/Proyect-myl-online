@@ -145,6 +145,38 @@
     letter-spacing: 0.06em;
 }
 
+#mazo select {
+    width: 100%;
+    padding: 11px 40px 11px 14px;
+    font-family: 'Crimson Pro', serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--text-primary);
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%238a6d18' d='M5 7L1 3h8z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    outline: none;
+    margin-bottom: 20px;
+}
+
+#mazo select:hover {
+    border-color: var(--accent-dim);
+    background-color: var(--bg-card-hover);
+    transform: translateX(3px);
+}
+
+#mazo select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-glow), 0 2px 12px rgba(0,0,0,0.4);
+    background-color: var(--bg-card-hover);
+}
+
 /* ══════════════════════════════════════════════════════
    LISTA DE MAZOS en modal — #listaMazos
    ══════════════════════════════════════════════════════ */

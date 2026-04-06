@@ -16,12 +16,12 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     port: dbConfig.PORT,
     dialect: dbConfig.DIALECT,
     logging: false,
-    family: 4,  // 👈 aquí afuera, no dentro de dialectOptions
+    family: 4,
     dialectOptions: {
-        ssl: {
+        ssl: process.env.NODE_ENV === 'production' ? {
             require: true,
             rejectUnauthorized: false
-        }
+        } : false
     }
 });
 

@@ -43,6 +43,12 @@ app.post ('/anadirCarta', añadirCarta); // Cambia esto si tienes una ruta difer
 app.post ('/deleteMazo', deleteMazo); // Cambia esto si tienes una ruta diferente para eliminar mazos
 app.post ('/deleteCarta', deleteCarta); // Cambia esto si tienes una ruta diferente para eliminar cartas de mazos
 // Función para iniciar el servidor después de la conexión a la base de datos
+
+console.log('DB_HOST:', process.env.DB_HOST)
+console.log('DB_USER:', process.env.DB_USER)
+console.log('DB_PASSWORD:', process.env.DB_PASSWORD)
+console.log('DB_PORT:', process.env.DB_PORT)
+
 app.listen(port, () => {
     console.log(`Servidor iniciado en http://localhost:${port}`);
 });
